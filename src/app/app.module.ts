@@ -19,6 +19,9 @@ import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { StatisticsComponent } from './incomes-expenses/statistics/statistics.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { environment } from '../environments/environment.development';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { appReducers } from './app.reducer';
 
 @NgModule({
   declarations: [
@@ -38,7 +41,12 @@ import { environment } from '../environments/environment.development';
     BrowserModule,
     AppRoutingModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    StoreModule.forRoot(appReducers),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production,
+    }),
   ],
   providers: [
     provideFirebaseApp(() => initializeApp(environment.firebase)),

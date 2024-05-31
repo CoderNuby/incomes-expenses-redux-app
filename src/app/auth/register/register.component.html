@@ -38,7 +38,8 @@
                         </div>
 
                         <div class="form-group">
-                            <button [disabled]="registerGroup.invalid" type="submit" class="btn btn-primary submit-btn btn-block">Create an account</button>
+                            <button *ngIf="!loading" [disabled]="registerGroup.invalid" type="submit" class="btn btn-primary submit-btn btn-block">Create an account</button>
+                            <button *ngIf="loading" disabled type="button" class="btn btn-primary submit-btn btn-block"><i class="fa fa-spin fa-sync"></i>Wait...</button>
                         </div>
                         <div class="text-block text-center my-3">
                             <span class="text-small font-weight-semibold">Do you have an account?</span>
