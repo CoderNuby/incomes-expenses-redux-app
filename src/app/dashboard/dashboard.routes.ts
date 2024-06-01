@@ -1,11 +1,11 @@
 import { Routes } from "@angular/router";
-import { StatisticsComponent } from "../incomes-expenses/statistics/statistics.component";
-import { IncomesExpensesComponent } from "../incomes-expenses/incomes-expenses.component";
-import { DetailsComponent } from "../incomes-expenses/details/details.component";
+import { StatisticsComponent } from "../transactions/statistics/statistics.component";
+import { TransactionComponent } from "../transactions/transaction.component";
+import { DetailsComponent } from "../transactions/details/details.component";
 
 
 export const dashboardRoutes: Routes = [
     { path: '', component: StatisticsComponent },
-    { path: 'incomes-expenses', component: IncomesExpensesComponent },
+    { path: 'incomes-expenses', component: TransactionComponent },
     { path: 'details', component: DetailsComponent }
 ];

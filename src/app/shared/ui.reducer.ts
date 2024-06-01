@@ -9,5 +9,5 @@ const initialState: UiState = {
 export const uiReducer = createReducer(
   initialState,
   on(uiActions.isLoading, (state) => ({ isLoading: true })),
-  on(uiActions.stopeLoading, (state) => ({ isLoading: false })),
+  on(uiActions.stopLoading, (state) => ({ isLoading: false })),
 );

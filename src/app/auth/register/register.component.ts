@@ -53,10 +53,10 @@ export class RegisterComponent implements OnInit, OnDestroy{
     let user: IUserAuth = { name, email, password }
     
     this.authService.createUser(user).then((credentials) => {
-      this.store.dispatch(uiActions.stopeLoading())
+      this.store.dispatch(uiActions.stopLoading())
       this.router.navigateByUrl("/");
     }).catch(err => {
-      this.store.dispatch(uiActions.stopeLoading())
+      this.store.dispatch(uiActions.stopLoading())
       Swal.fire({
         position: "top-end",
         icon: "error",

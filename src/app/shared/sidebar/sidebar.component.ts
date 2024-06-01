@@ -14,7 +14,7 @@ import { Subscription } from 'rxjs';
 export class SidebarComponent implements OnInit, OnDestroy {
 
   user: UserModel | null = null;
-  storeSubscription!: Subscription;
+  userSubscription!: Subscription;
 
   constructor(
     private authService: AuthService,
@@ -23,13 +23,13 @@ export class SidebarComponent implements OnInit, OnDestroy {
   ){}
   
   ngOnInit(): void {
-    this.storeSubscription = this.store.select('auth').subscribe(state => {
+    this.userSubscription = this.store.select('auth').subscribe(state => {
       this.user = state.user;
     });
   }
 
   ngOnDestroy(): void {
-    this.storeSubscription.unsubscribe();
+    this.userSubscription.unsubscribe();
   }
 
   logOut(){

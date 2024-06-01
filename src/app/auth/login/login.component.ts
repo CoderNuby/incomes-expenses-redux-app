@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     let userAuth: IUserAuth = { name: "", email, password }
 
     this.authService.loginUser(userAuth).then((credentials) => {
-      this.store.dispatch(uiActions.stopeLoading());
+      this.store.dispatch(uiActions.stopLoading());
       let userModel: UserModel = {
         uid: credentials.user.uid,
         email: credentials.user.email!,
@@ -61,7 +61,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       }
       this.router.navigateByUrl("/");
     }).catch(err => {
-      this.store.dispatch(uiActions.stopeLoading());
+      this.store.dispatch(uiActions.stopLoading());
       Swal.fire({
         position: "top-end",
         icon: "error",

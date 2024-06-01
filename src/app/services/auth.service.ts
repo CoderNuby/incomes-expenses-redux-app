@@ -7,6 +7,7 @@ import { Firestore, doc, setDoc } from '@angular/fire/firestore';
 import { Store } from '@ngrx/store';
 import { AppState } from '../app.reducer';
 import * as authActions from '../auth/auth.actions';
+import * as transactionActions from '../transactions/transaction.actions';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +27,8 @@ export class AuthService {
         this.store.dispatch(authActions.setUser({user: { uid: user.uid, email: user.email!, name: user.displayName! }}));
       }else{
         this.store.dispatch(authActions.unsetUser());
+        this.store.dispatch(transactionActions.unsetItems());
+        this.store.dispatch(transactionActions.unsetTransactionTotals());
       }
     });
   }
