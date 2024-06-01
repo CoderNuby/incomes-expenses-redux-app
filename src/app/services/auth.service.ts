@@ -7,7 +7,7 @@ import { Firestore, doc, setDoc } from '@angular/fire/firestore';
 import { Store } from '@ngrx/store';
 import { AppState } from '../app.reducer';
 import * as authActions from '../auth/auth.actions';
-import * as transactionActions from '../transactions/transaction.actions';
+import * as transactionActions from '../transaction/transaction.actions';
 
 @Injectable({
   providedIn: 'root'
@@ -41,8 +41,9 @@ export class AuthService {
     return createUserWithEmailAndPassword(this.auth, user.email, user.password)
     .then(userCredential => {
       const newUser = new UserModel(userCredential.user.uid, user.name, user.email || "");
-      return setDoc(doc(this.fireStore, `users/${userCredential.user.uid}`), {...newUser}).then(() => {
-        return updateProfile(userCredential.user, { displayName: user.name }).then(() => {
+      return updateProfile(userCredential.user, { displayName: user.name }).then(() => {  
+        return setDoc(doc(this.fireStore, `users/${userCredential.user.uid}`), {...newUser}).then(() => {
+          this.store.dispatch(authActions.setUser({user: { uid: userCredential.user.uid, email: user.email!, name: user.name! }}));
           return userCredential;
         });
       });

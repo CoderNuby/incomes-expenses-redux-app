@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TransactionModel } from '../../models/transaction';
 import { Store } from '@ngrx/store';
-import { AppState } from '../../app.reducer';
+import { AppStateLazyLoad } from '../../app.reducer';
 import { Subscription } from 'rxjs';
 import { TransactionService } from '../../services/transaction.service';
 import Swal from 'sweetalert2';
@@ -16,7 +16,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
   transactionItems: TransactionModel[] | null = [];
   transactionSubscription!: Subscription;
 
-  constructor(private store: Store<AppState>,
+  constructor(private store: Store<AppStateLazyLoad>,
     private transactionService: TransactionService
   ){
 

@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { AppState } from '../../app.reducer';
+import { AppStateLazyLoad } from '../../app.reducer';
 import { Subscription } from 'rxjs';
 import { LineChartBasicChartOptions } from './line-chart-basic/line-chart-basic.component';
 import { TransactionModel } from '../../models/transaction';
@@ -30,7 +30,7 @@ export class StatisticsComponent implements OnInit, OnDestroy {
   }
 
   constructor(
-    private store: Store<AppState>,
+    private store: Store<AppStateLazyLoad>,
     private datePipe: DatePipe
   ){
   }
@@ -54,8 +54,8 @@ export class StatisticsComponent implements OnInit, OnDestroy {
   private setLineChartBasicChartOptions(): Partial<LineChartBasicChartOptions> {
     let chartDataTotal: number[] = [];
     let chartDataCreatedDate: string[] = [];
-    this.transactionItems?.forEach(item => {
-      let total = 0;
+    let total = 0;
+    this.transactionItems?.slice().reverse().forEach(item => {
       if(item.type == "income"){
         total += item.amount;
         chartDataTotal.push(total);

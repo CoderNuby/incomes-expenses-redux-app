@@ -4,7 +4,7 @@ import { AppState } from '../app.reducer';
 import { UserModel } from '../models/user';
 import { Subscription, filter, map, pipe } from 'rxjs';
 import { TransactionService } from '../services/transaction.service';
-import * as transactionActions from '../transactions/transaction.actions';
+import * as transactionActions from '../transaction/transaction.actions';
 import { TransactionModel } from '../models/transaction';
 
 @Component({
@@ -32,7 +32,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.userSubscription = this.store.select('auth').subscribe(state => {
+    this.userSubscription = this.store.select('auth').pipe(filter(x => x.user != null)).subscribe(state => {
       this.user = state.user;
       this.transactionSubscription = this.transactionService.initTransactionItemsListeners(this.user!.uid).subscribe(items => {
         this.store.dispatch(transactionActions.setItems({items}));
